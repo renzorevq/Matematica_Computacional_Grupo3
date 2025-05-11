@@ -18,8 +18,8 @@ h1 {
 	color: #fff;	
 }
 p {
-	margin-bottom: 40px;
-	text-align: center;
+	/* margin-bottom: 40px;
+	text-align: center; */
 }
 
 a:hover {
@@ -50,7 +50,7 @@ a:hover {
 	font-size: 0;
 	text-align: left;
 }
-.pcss3t > input {
+.pcss3t > input, .pcss3t .tab-labels > input {
 	position: absolute;
 	left: -9999px;
 }
@@ -94,13 +94,14 @@ a:hover {
 	font-size: 13px;
 }
 .pcss3t > ul > li {
-	position: absolute;
+	/* position: absolute; */
 	width: 100%;
 	overflow: auto;
 	padding: 30px 40px 40px;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	opacity: 0;
+	display: none;
 	transition: all 0.5s;
 	-o-transition: all 0.5s;	
 	-ms-transition: all 0.5s;	
@@ -117,21 +118,21 @@ a:hover {
 .pcss3t > .tab-content-8:checked ~ ul .tab-content-8,
 .pcss3t > .tab-content-9:checked ~ ul .tab-content-9,
 .pcss3t > .tab-content-last:checked ~ ul .tab-content-last {
+	display: block; 
+	opacity: 1;
 	z-index: 1;
 	top: 0;
 	left: 0;
-	opacity: 1;
-	-webkit-transform: scale(1,1);
-	-webkit-transform: rotate(0deg);
+	transform: scale(1, 1) rotate(0deg);
 }
 
 .pcss3t-height-auto > ul {
-	height: auto !important;
+	/* height: auto !important; */
 }
 .pcss3t-height-auto > ul > li {
-	position: static;
-	display: none;
-	height: auto !important;
+	/* position: static; */
+	/* display: none; */
+	/* height: auto !important; */
 }
 .pcss3t-height-auto > .tab-content-first:checked ~ ul .tab-content-first,
 .pcss3t-height-auto > .tab-content-2:checked ~ ul .tab-content-2,
@@ -139,7 +140,7 @@ a:hover {
 .pcss3t-height-auto > .tab-content-4:checked ~ ul .tab-content-4,
 .pcss3t-height-auto > .tab-content-5:checked ~ ul .tab-content-5,
 .pcss3t-height-auto > .tab-content-last:checked ~ ul .tab-content-last {
-	display: block;
+	/* display: block; */
 }
 
 .pcss3t .grid-row {
@@ -700,7 +701,7 @@ a:hover {
 	background: #e5e5e5;	
 }
 
-.pcss3t-theme-1 > label {
+.pcss3t-theme-1 > label, .pcss3t-theme-1 .tab-labels > label {
 	margin: 0 5px 5px 0;
 	border-radius: 5px;
 	background: #fff;
@@ -712,7 +713,7 @@ a:hover {
 	background: #fff;
 	opacity: 1;
 }
-.pcss3t-theme-1 > input:checked + label {
+.pcss3t-theme-1 > input:checked + label, .pcss3t-theme-1 .tab-labels > input:checked + label {
 	margin-bottom: 0;
 	padding-bottom: 5px;
 	border-bottom-right-radius: 0;
@@ -905,5 +906,71 @@ a:hover {
 
 .pcss3t > ul,
 .pcss3t > ul > li {
-	height: 370px;
+	/* height: 370px; */
+}
+
+.pcss3t-vertical {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  
+  .pcss3t-vertical > input[type="radio"] {
+    display: none;
+  }
+  
+  .pcss3t-vertical .tab-labels {
+    display: flex;
+    flex-direction: column;
+    margin-right: 1rem;
+  }
+  
+  .pcss3t-vertical .tab-labels label {
+    display: block;
+    padding: 1em;
+    cursor: pointer;
+    background: #eee;
+    border: 1px solid #ccc;
+    margin-bottom: 2px;
+    width: 160px;
+    text-align: left;
+  }
+  
+  .pcss3t-vertical > ul {
+    flex: 1;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .pcss3t-vertical .tab-content {
+    display: block;
+  }
+  
+  .pcss3t-vertical #tab1:checked ~ ul > .tab-content-first,
+  .pcss3t-vertical #tab2:checked ~ ul > .tab-content-2 {
+    /* display: block; */
+  }
+  
+  .pcss3t-vertical #tab1:checked ~ .tab-labels label[for="tab1"],
+  .pcss3t-vertical #tab2:checked ~ .tab-labels label[for="tab2"] {
+    background: #ddd;
+    font-weight: bold;
+  }
+  
+  .pcss3t-vertical .tab-labels > label {
+	padding: 0 20px;
+	background: #e5e5e5;
+	font-size: 13px;
+	line-height: 49px;
+}
+
+.pcss3t-vertical {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    grid-template-areas: 
+        "cmp1 cmp5"
+        "cmp2 cmp5"
+        "cmp3 cmp5"
+        "cmp4 cmp5";
 }

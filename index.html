@@ -10,7 +10,10 @@
     <link rel="stylesheet" href="./css/menu.css">
     <link rel="stylesheet" href="./css/tabs.css">
     <link rel="stylesheet" href="./css/upload-file.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.1.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="./css/table.css">
+    <link rel="stylesheet" href="./css/modal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
 </head>
 
 <body>
@@ -38,39 +41,144 @@
                     <ul>
                         <li class="tab-content tab-content-first typography">
                             <div class="form">
+
+                                <div class="textarea-toolbar cmp5">
+                                    <button class="icon-button" title="Borrar texto" onclick="fnBorrarTexto()">
+                                        <i class="fas fa-eraser"></i>
+                                    </button>
+                                    <button class="icon-button" title="Copiar texto" onclick="fnCopiarTexto()">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                    <button class="icon-button" title="Copiar texto binario"
+                                        onclick="fnCopiarBinario()">
+                                        <!-- <i class="fa-light fa-square-binary"></i> -->
+                                        <svg width="50" height="50" viewBox="0 0 50 50"
+                                            xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                                            <text x="6" y="11" font-size="12" font-family="monospace"
+                                                font-weight="bold">01</text>
+                                            <text x="6" y="25" font-size="12" font-family="monospace"
+                                                font-weight="bold">10</text>
+                                        </svg>
+
+                                    </button>
+                                </div>
+
+                                <!-- <input type="file" id="fileInput" accept=".huffmn" />
+                                <button onclick="enviarCorreo()">Enviar archivo .huffmn</button> -->
+
                                 <div class="cmp1 label13">
                                     <label class="f-15">Ingrese texto</label>
                                 </div>
                                 <div class="cmp2">
-                                    <textarea id="" rows="7" class="w-100 f-15"></textarea>
+                                    <textarea id="txt_texto_entrada" rows="7" class="w-100 f-15"></textarea>
                                 </div>
-                                <div class="text-align-right cmp3">
-                                    <button type="button" class="button-25">Comprimir</button>
+
+                                <div class="cmp4 label13">
+                                    <label class="f-15">Cadena binaria </label>
                                 </div>
+                                <div class="cmp6">
+                                    <textarea id="txt_binario_salida" rows="7" readonly class="w-100 f-15"></textarea>
+                                </div>
+                            </div>
+                            <div class="text-align-right cmp3 mt-15">
+                                <button id="" onclick="fnAbrirModalPasos()" type="button" class="button-25">Mostrar
+                                    Pasos</button>
+                                <button id="btn_comprimir" type="button" class="button-25">Comprimir</button>
+                                <button id="btn_descargar_binario" title="Descargar archivo binario" type="button" class="button-25 contraste"><i
+                                        class="fa-solid fa-circle-down"></i></button>
+                                <button id="btn_descargar_binario" title="Enviar por correo" onclick="fnAbrirModalCorreo()" type="button" class="button-25 contraste"><i
+                                        class="fa-solid fa-paper-plane"></i></button>
                             </div>
                         </li>
 
                         <li class="tab-content tab-content-2 typography">
-                            <div>
-                                <label for="btn_file" class="drop-container" id="lbl_dropzone">
-                                    <span class="drop-title">Arrastre o seleccione un archivo txt</span>
-                                    <input type="file" id="btn_file" accept="image/*" class="d-none" required>
+                            <div class="switch-container d-none">
+                                <label class="switch">
+                                    <input type="checkbox" id="switchModo">
+                                    <span class="slider"></span>
                                 </label>
+                                <span>Manual</span>
+                            </div>
+                            <div>
+                                <div id="div_manual" class="form2 d-none">
+                                    <div class="cmp1 label13">
+                                        <label class="f-15">Ingrese binario</label>
+                                    </div>
+                                    <div class="cmp2">
+                                        <textarea id="txt_texto_entrada"
+                                            oninput="this.value = this.value.replace(/[^01]/g, '')" rows="7"
+                                            class="w-100 f-15"></textarea>
+                                    </div>
+                                </div>
+                                <div id="div_no_manual">
+                                    <label for="btn_file" class="drop-container" id="lbl_dropzone">
+                                        <div id="drop_content">
+                                            <span class="drop-title">Arrastre o seleccione un archivo huffman</span>
+                                        </div>
+                                        <input type="file" id="btn_file" accept=".huffman" class="d-none" required>
+                                    </label>
+                                    <div class="cmp4 label13">
+                                        <label class="f-15">Contenido: </label>
+                                    </div>
+                                    <div class="cmp6">
+                                        <textarea id="txt_binario" rows="7" readonly class="w-100 f-15"></textarea>
+                                    </div>
+                                </div>
                             </div>
                         </li>
 
-                        <li class="tab-content tab-content-3 typography">
-
-                        </li>
-
-                        <li class="tab-content tab-content-last typography">
-
-
                         </li>
                     </ul>
+
+                    <!-- <svg width="800" height="400"></svg> -->
                 </div>
             </div>
         </section>
+
+        <!-- <div id="modal" class="modal">
+            <div class="modal-contenido">
+                <span class="cerrar" onclick="cerrarModal()">&times;</span>
+                <h2>Algoritmo de Huffman</h2>
+                <div class="pcss3t pcss3t-vertical pcss3t-effect-scale pcss3t-theme-1">
+
+                    <input type="radio" name="pcss3t-vertical" id="tab3" class="tab-content-3">
+                    <label for="tab3" class="cmp1">Paso 1</label>
+
+                    <input type="radio" name="pcss3t-vertical" id="tab4" class="tab-content-4">
+                    <label for="tab4" class="cmp2">Paso 2</label>
+
+                    <input type="radio" name="pcss3t-vertical" id="tab5" class="tab-content-5">
+                    <label for="tab5" class="cmp3">Paso 3</label>
+
+                    <input type="radio" name="pcss3t-vertical" id="tab6" class="tab-content-6">
+                    <label for="tab6" class="cmp4">Paso 4</label>
+
+                    <ul class="cmp5">
+                        <li class="tab-content tab-content-3">
+                            <h3>Determinar la frecuencia en la que se repite cada caracter: <br>Contabilizar cada
+                                caracter </h3> <br>
+                            <table class="fl-table" id="tbl_frecuencia">
+                                <thead>
+                                    <tr>
+                                        <th>Caracter</th>
+                                        <th>Frecuencia</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </li>
+                        <li class="tab-content tab-content-4 typography">Contenido 2</li>
+                        <li class="tab-content tab-content-5 typography">Contenido 3</li>
+                        <li class="tab-content tab-content-6 typography">Contenido 4</li>
+                    </ul>
+
+
+                </div>
+            </div>
+        </div> -->
+
         <section id="sc_creditos" class="d-none">
             <p>Hola 2</p>
         </section>
@@ -80,9 +188,51 @@
     </footer>
 
     <script src="./js/index.js"></script>
-    <script src="./js/upload-file.js"></script>
+    <script src="./js/upload-download-file.js"></script>
     <script src="./js/algoritmo-huffman.js"></script>
+    <script src="./js/modal.js"></script>
+    <script src="./js/email-service.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://kit.fontawesome.com/b944fc747d.js" crossorigin="anonymous"></script>
 
 </body>
+
+<div id="mdDescargarArchivo" class="modal">
+    <div class="modal-content">
+        <span class="close-button" onclick="fnCerrarModal()">×</span>
+        <h2>Nombre del archivo</h2>
+        <div class="input-group">
+            <div class="input-wrapper w-100">
+                <input type="text" id="txtNombreArchivo" class="w-100" maxlength="45" placeholder="texto_codificado"
+                    oninput="actualizarContador()">
+                <div id="lblContadorNombreArchivo" class="char-counter">0 / 20</div>
+            </div>
+            <div class="input-wrapper">
+                <input type="text" id="txtExtension" value=".huffman" readonly class="ext">
+            </div>
+        </div>
+        <div class="modal-buttons">
+            <button onclick="fnDescargarArchivoBinario()" class="mt-20 button-25 contraste"><i
+                    class="fa-regular fa-circle-down fa-xl"></i> Descargar</button>
+        </div>
+    </div>
+</div>
+
+<div id="mdEnvioCorreo" class="modal">
+    <div class="modal-content">
+        <span class="close-button" onclick="fnCerrarModalCorreo()">×</span>
+        <h2>Correo destinatario</h2>
+        <div class="input-group">
+            <div class="input-wrapper w-100">
+                <input type="text" id="txtCorreo" class="w-100" maxlength="45" placeholder="correo@gmail.com">
+            </div>
+        </div>
+        <div class="modal-buttons">
+            <button onclick="enviarCorreo()" class="mt-20 button-25 contraste"><i
+                    class="fa-regular fa-circle-down fa-xl"></i> Enviar Correo</button>
+        </div>
+    </div>
+</div>
 
 </html>
