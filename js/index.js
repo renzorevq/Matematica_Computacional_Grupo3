@@ -162,8 +162,6 @@ const fnDescargarArchivoBinario = () => {
     fnCerrarModal();
 }
 
-
-
 function nodoAD3(nodo, lado = '') {
     if (!nodo) return null;
 
