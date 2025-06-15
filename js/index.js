@@ -166,6 +166,74 @@ const fnPaso4 = () => {
 
 const fnPaso5 = () => {
   // TODO: Arbol binario grafico
+  d3.select("#arbol-huffman").selectAll("*").remove();
+
+  const texto = txtTextoEntrada.value;
+  const arbolBinario = construirArbolHuffman(texto);
+  const data = nodoAD3(arbolBinario);
+
+  const root = d3.hierarchy(data);
+  const numHojas = root.leaves().length;
+
+  const width = Math.max(650, numHojas * 70);
+  const height = 520;
+
+  const treeLayout = d3.tree().size([width - 50, height - 50]);
+  treeLayout(root);
+
+  const svg = d3
+    .select("#arbol-huffman")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+  const g = svg.append("g").attr("transform", "translate(0, 30)"); // 👈 bajamos 30px
+
+  // Líneas (enlaces)
+  g.selectAll("line")
+    .data(root.links())
+    .enter()
+    .append("line")
+    .attr("x1", (d) => d.source.x)
+    .attr("y1", (d) => d.source.y)
+    .attr("x2", (d) => d.target.x)
+    .attr("y2", (d) => d.target.y)
+    .attr("stroke", "black");
+
+  // Etiquetas en las líneas (0, 1)
+  g.selectAll("text.edge")
+    .data(root.links())
+    .enter()
+    .append("text")
+    .attr("class", "edge")
+    .attr("x", (d) => (d.source.x + d.target.x) / 2)
+    .attr("y", (d) => (d.source.y + d.target.y) / 2 - 5)
+    .attr("text-anchor", "middle")
+    .text((d) => d.target.data.edgeLabel || "");
+
+  // Círculos de nodos
+  g.selectAll("circle")
+    .data(root.descendants())
+    .enter()
+    .append("circle")
+    .attr("cx", (d) => d.x)
+    .attr("cy", (d) => d.y)
+    .attr("r", 18)
+    .attr("fill", (d) => (d.children ? "#93c5fd" : "#000000"));
+
+  // Texto de nodos
+  g.selectAll("text.node")
+    .data(root.descendants())
+    .enter()
+    .append("text")
+    .attr("class", "node")
+    .attr("x", (d) => d.x)
+    .attr("y", (d) => d.y + 4)
+    .attr("text-anchor", "middle")
+    .attr("font-size", (d) => (d.children ? "11px" : "20px")) // 👈 Más grande para hojas
+    .attr("font-weight", (d) => (d.children ? "normal" : "bold")) // opcional
+    .attr("fill", (d) => (d.children ? "#1e3a8a" : "#ffffff"))
+    .text((d) => d.data.name);
 };
 
 const fnPaso6 = () => {
@@ -361,7 +429,7 @@ function nodoAD3(nodo, lado = "") {
 
   const nombre =
     nodo.caracter !== null
-      ? `${nodo.caracter} (${nodo.frecuencia})`
+      ? `${obtenerCaracter(nodo.caracter, true)}`
       : `${nodo.frecuencia}`;
 
   const resultado = { name: nombre };
