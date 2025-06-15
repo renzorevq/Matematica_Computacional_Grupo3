@@ -387,6 +387,7 @@ const fnBorrarTexto = () => {
   txtBinarioSalida.value = "";
   txtTextoEntrada.value = "";
   txtTextoEntrada.focus();
+  document.getElementById("sp_contador_caracteres").textContent = "0";
 };
 
 const fnCopiarTexto = () => {
