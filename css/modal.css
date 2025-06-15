@@ -22,7 +22,7 @@
   max-width: 400px;
   text-align: center;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
 }
 
 .modal-content input {
@@ -62,7 +62,7 @@
   width: 60px;
   background-color: #f3f3f3;
   color: #666;
-  cursor: not-allowed; 
+  cursor: not-allowed;
 }
 
 input[readonly]:focus {
@@ -76,3 +76,63 @@ input[readonly]:focus {
   margin-top: 2px;
 }
 
+.modal-contenido {
+  background-color: #ffffff;
+  padding: 20px;
+  position: relative;
+  border-radius: 15px;
+  box-shadow: 0 3px rgba(0, 0, 0, 0.2);
+  height: 500px;
+  width: 800px;
+}
+
+.modal-titulo {
+  text-align: center;
+}
+
+.cerrar {
+  position: absolute;
+  font-size: 20px;
+  right: -16px;
+  top: -15px;
+  text-align: center;
+  background-color: #d9aeae;
+  border-radius: 25px;
+  font-weight: bold;
+  width: 50px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.no-box-shadow {
+  box-shadow: none !important;
+}
+
+.contenido-dinamico {
+  /* height: 500px;
+  width: 500px; */
+  height: 100%;
+  margin: 15px 0px;
+}
+
+.pasos-tab {
+  font-size: 20px !important;
+}
+
+.h-95 {
+  height: 95%;
+}
+
+.contenido-dinamico h3 {
+  font-size: 15px;
+  font-weight: 100;
+}
+
+.contenido-dinamico table {
+  margin-top: 20px;
+}
+
+.paso1 {
+  max-height: 450px;
+  overflow: auto;
+}

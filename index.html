@@ -13,117 +13,106 @@
     <link rel="stylesheet" href="./css/table.css">
     <link rel="stylesheet" href="./css/modal.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-
+    <link href="https://unpkg.com/tailwindcss@^2.2/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
 <body>
 
     <header>
         <nav>
-            <ul class="menu-bar">
-                <li class="menu-item"><a id="btn_pagina_principal">Grupo 3</a>
+            <ul class="h-auto py-3 gap-5 bg-blue-900 flex flex-row justify-center text-xl">
+                <li class="text-blue-50 rounded-full hover:bg-blue-200 hover:text-blue-900">
+                    <button class="py-1 px-5">Inicio</button>
                 </li>
-                <li class="menu-item"><a id="btn_creditos">Créditos</a></li>
+                <li class="text-blue-50 rounded-full hover:bg-blue-200 hover:text-blue-900">
+                    <button class="py-1 px-5">Créditos</button>
+                </li>
             </ul>
         </nav>
     </header>
-    <hr>
-    <main>
-        <section id="sc_pagina_principal">
-            <div class="page">
-                <div class="pcss3t pcss3t-effect-scale pcss3t-theme-1">
-                    <input type="radio" name="pcss3t" checked id="tab1" class="tab-content-first">
-                    <label for="tab1">Comprimir</label>
-
-                    <input type="radio" name="pcss3t" id="tab2" class="tab-content-2">
-                    <label for="tab2">Descomprimir</label>
+    <main class="w-full bg-blue-100 section-min-height-screen">
+        <section class="flex justify-center items-center section-min-height-screen">
+            <div class="bg-white rounded-lg shadow-lg w-8/12">
+            
+                    <div class="flex border-b">
+                        <button id="boton0" class="w-1/2 py-6 text-gray-500" onclick="cambiarPestana(0)" tab="inicio">Comprimir</button>
+                        <button id="boton1" class="w-1/2 py-6 text-gray-500" onclick="cambiarPestana(1)" tab="inicio">Descomprimir</button>
+                    </div>
 
                     <ul>
-                        <li class="tab-content tab-content-first typography">
-                            <div class="form">
+                        <li class="m-8" id="pestana0" tab="inicio">
 
-                                <div class="textarea-toolbar cmp5">
-                                    <button class="icon-button" title="Borrar texto" onclick="fnBorrarTexto()">
-                                        <i class="fas fa-eraser"></i>
-                                    </button>
-                                    <button class="icon-button" title="Copiar texto" onclick="fnCopiarTexto()">
-                                        <i class="fas fa-copy"></i>
-                                    </button>
-                                    <button class="icon-button" title="Copiar texto binario"
-                                        onclick="fnCopiarBinario()">
-                                        <!-- <i class="fa-light fa-square-binary"></i> -->
-                                        <svg width="50" height="50" viewBox="0 0 50 50"
-                                            xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-                                            <text x="6" y="11" font-size="12" font-family="monospace"
-                                                font-weight="bold">01</text>
-                                            <text x="6" y="25" font-size="12" font-family="monospace"
-                                                font-weight="bold">10</text>
-                                        </svg>
+                            <div class="flex gap-1 justify-end">
+                                <button class="w-10 h-10 border border-gray-500 rounded-md hover:bg-gray-200" title="Borrar texto" onclick="fnBorrarTexto()">
+                                    <i class="fas fa-eraser"></i>
+                                </button>
+                                <button class="w-10 h-10 border border-gray-500 rounded-md hover:bg-gray-200" title="Copiar texto" onclick="fnCopiarTexto()">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                                <button class="w-10 h-10 border border-gray-500 rounded-md hover:bg-gray-200" title="Copiar texto binario" onclick="fnCopiarBinario()">
+                                    <svg width="40" height="40" viewBox="0 0 40 40"
+                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                                        <text x="12" y="16" font-size="12" font-family="monospace"
+                                            font-weight="bold">01</text>
+                                        <text x="12" y="30" font-size="12" font-family="monospace"
+                                            font-weight="bold">10</text>
+                                    </svg>
 
-                                    </button>
+                                </button>
+                            </div>
+                            <div class="grid grid-cols-12 gap-y-1 mt-4">
+                                <div class="col-span-2">
+                                    <label class="text-gray-500">Ingrese texto</label>
+                                </div>
+                                <div class="col-span-10 relative">
+                                    <textarea id="txt_texto_entrada" rows="5" class="w-full p-3 border rounded-md resize-none text-gray-600" maxlength="20" oninput="fnAumentarCaracteres(event)"></textarea>
+                                    <div class="absolute bottom-4 right-3 text-right text-sm text-gray-600">
+                                        <span class="font-bold" id="sp_contador_caracteres">0</span> / 20 caracteres
+                                    </div>
                                 </div>
 
-                                <!-- <input type="file" id="fileInput" accept=".huffmn" />
-                                <button onclick="enviarCorreo()">Enviar archivo .huffmn</button> -->
-
-                                <div class="cmp1 label13">
-                                    <label class="f-15">Ingrese texto</label>
+                                <div class="col-span-2">
+                                    <label class="text-gray-500">Cadena binaria </label>
                                 </div>
-                                <div class="cmp2">
-                                    <textarea id="txt_texto_entrada" rows="7" class="w-100 f-15"></textarea>
-                                </div>
-
-                                <div class="cmp4 label13">
-                                    <label class="f-15">Cadena binaria </label>
-                                </div>
-                                <div class="cmp6">
-                                    <textarea id="txt_binario_salida" rows="7" readonly class="w-100 f-15"></textarea>
+                                <div class="col-span-10">
+                                    <textarea id="txt_binario_salida" rows="5" readonly class="w-full p-3 border rounded-md resize-none bg-gray-100 focus:outline-none cursor-not-allowed text-gray-400"></textarea>
                                 </div>
                             </div>
-                            <div class="text-align-right cmp3 mt-15">
-                                <button id="" onclick="fnAbrirModalPasos()" type="button" class="button-25">Mostrar
-                                    Pasos</button>
-                                <button id="btn_comprimir" type="button" class="button-25">Comprimir</button>
-                                <button id="btn_descargar_binario" title="Descargar archivo binario" type="button" class="button-25 contraste"><i
-                                        class="fa-solid fa-circle-down"></i></button>
-                                <button id="btn_descargar_binario" title="Enviar por correo" onclick="fnAbrirModalCorreo()" type="button" class="button-25 contraste"><i
-                                        class="fa-solid fa-paper-plane"></i></button>
+                            <div class="flex justify-end gap-1 mt-4">
+                                <button class="border border-gray-500 p-2 rounded-md" type="button" onclick="fnAbrirModalPasos()">Mostrar Pasos</button>
+                                <button id="btn_comprimir" class="border border-gray-500 p-2 rounded-md" type="button">Comprimir</button>
+                                <button id="btn_descargar_binario" class="border border-gray-500 py-2 px-4 rounded-md" title="Descargar archivo binario" type="button">
+                                    <i class="fa-solid fa-circle-down"></i>
+                                </button>
+                                <button id="btn_descargar_binario" class="border border-gray-500 py-2 px-4 rounded-md" title="Enviar por correo" onclick="fnAbrirModalCorreo()" type="button">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </button>
                             </div>
+                            
                         </li>
 
-                        <li class="tab-content tab-content-2 typography">
-                            <div class="switch-container d-none">
-                                <label class="switch">
-                                    <input type="checkbox" id="switchModo">
-                                    <span class="slider"></span>
-                                </label>
-                                <span>Manual</span>
-                            </div>
-                            <div>
-                                <div id="div_manual" class="form2 d-none">
-                                    <div class="cmp1 label13">
-                                        <label class="f-15">Ingrese binario</label>
-                                    </div>
-                                    <div class="cmp2">
-                                        <textarea id="txt_texto_entrada"
-                                            oninput="this.value = this.value.replace(/[^01]/g, '')" rows="7"
-                                            class="w-100 f-15"></textarea>
-                                    </div>
+                        <li class="m-8 hidden" id="pestana1" tab="inicio">
+                            <div class="grid grid-cols-12 gap-y-1">
+                                <div id="drop_content" class="col-span-12 h-60 flex justify-center items-center border-4 border-gray-200 border-dashed rounded-md hover:bg-gray-100 hover:border-gray-400 cursor-pointer">
+                                    <input type="file" id="btn_file" accept=".huffman" class="hidden" required>
+                                    <span class="text-2xl text-gray-400 text-center"><i class="fa-solid fa-folder-open fa-2xl"></i> <br/><br/> seleccione un archivo huffman</span>
                                 </div>
-                                <div id="div_no_manual">
-                                    <label for="btn_file" class="drop-container" id="lbl_dropzone">
-                                        <div id="drop_content">
-                                            <span class="drop-title">Arrastre o seleccione un archivo huffman</span>
+                                <div id="drop_content_selected" class="col-span-12 h-60 flex justify-center items-center hidden">
+                                    <div class="relative border border-blue-500 rounded-md h-4/5 flex items-center px-10">
+                                        <div class="h-10 w-10 absolute -right-3 -top-3 flex items-center justify-center bg-white cursor-pointer" onclick="eliminarArchivo()">
+                                            <i class="fa-solid fa-2xl fa-circle-xmark text-red-500"></i>
                                         </div>
-                                        <input type="file" id="btn_file" accept=".huffman" class="d-none" required>
-                                    </label>
-                                    <div class="cmp4 label13">
-                                        <label class="f-15">Contenido: </label>
-                                    </div>
-                                    <div class="cmp6">
-                                        <textarea id="txt_binario" rows="7" readonly class="w-100 f-15"></textarea>
+                                        <span class="text-2xl text-blue-500 text-center"><i class="fas fa-file-alt fa-2xl"></i></i> <br/><br/> <span id="sp_nombre_archivo"></span></span>
                                     </div>
                                 </div>
+                                <!-- <label for="btn_file" class="drop-container" id="lbl_dropzone"></label> -->
+                                <div class="cmp4 label13 col-span-12">
+                                    <label class="text-gray-500">Contenido: </label>
+                                </div>
+                                <div class="cmp6 col-span-12">
+                                    <textarea id="txt_binario" rows="5" readonly class="w-full p-3 border rounded-md resize-none bg-gray-100 focus:outline-none cursor-not-allowed text-gray-400"></textarea>
+                                </div>
+                                
                             </div>
                         </li>
 
@@ -131,56 +120,12 @@
                     </ul>
 
                     <!-- <svg width="800" height="400"></svg> -->
-                </div>
+                
             </div>
         </section>
 
-        <!-- <div id="modal" class="modal">
-            <div class="modal-contenido">
-                <span class="cerrar" onclick="cerrarModal()">&times;</span>
-                <h2>Algoritmo de Huffman</h2>
-                <div class="pcss3t pcss3t-vertical pcss3t-effect-scale pcss3t-theme-1">
-
-                    <input type="radio" name="pcss3t-vertical" id="tab3" class="tab-content-3">
-                    <label for="tab3" class="cmp1">Paso 1</label>
-
-                    <input type="radio" name="pcss3t-vertical" id="tab4" class="tab-content-4">
-                    <label for="tab4" class="cmp2">Paso 2</label>
-
-                    <input type="radio" name="pcss3t-vertical" id="tab5" class="tab-content-5">
-                    <label for="tab5" class="cmp3">Paso 3</label>
-
-                    <input type="radio" name="pcss3t-vertical" id="tab6" class="tab-content-6">
-                    <label for="tab6" class="cmp4">Paso 4</label>
-
-                    <ul class="cmp5">
-                        <li class="tab-content tab-content-3">
-                            <h3>Determinar la frecuencia en la que se repite cada caracter: <br>Contabilizar cada
-                                caracter </h3> <br>
-                            <table class="fl-table" id="tbl_frecuencia">
-                                <thead>
-                                    <tr>
-                                        <th>Caracter</th>
-                                        <th>Frecuencia</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                </tbody>
-                            </table>
-                        </li>
-                        <li class="tab-content tab-content-4 typography">Contenido 2</li>
-                        <li class="tab-content tab-content-5 typography">Contenido 3</li>
-                        <li class="tab-content tab-content-6 typography">Contenido 4</li>
-                    </ul>
-
-
-                </div>
-            </div>
-        </div> -->
-
         <section id="sc_creditos" class="d-none">
-            <p>Hola 2</p>
+            
         </section>
     </main>
     <footer>
@@ -195,8 +140,163 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://kit.fontawesome.com/b944fc747d.js" crossorigin="anonymous"></script>
-
 </body>
+
+<div id="modal" class="modal">
+    <div class="w-4/6 h-4/6 bg-white rounded-md p-5 relative">
+        <span class="cerrar" onclick="cerrarModal()">&times;</span>
+        <h2 class="text-3xl text-blue-500 text-center font-bold">Algoritmo de Huffman</h2>
+        <div class="grid grid-cols-12 modal-container-height pt-2">
+            <div class="col-span-2">
+                <button type="button" paso="1" class="w-full p-5 text-blue-100" onclick="fnDirigirPaso(1)">Paso 1</button>  
+                <!-- bg-blue-100 rounded-l-lg  -->
+                <button type="button" paso="2" class="w-full p-5 text-blue-100" onclick="fnDirigirPaso(2)">Paso 2</button>
+                <button type="button" paso="3" class="w-full p-5 text-blue-100" onclick="fnDirigirPaso(3)">Paso 3</button>
+                <button type="button" paso="4" class="w-full p-5 text-blue-100" onclick="fnDirigirPaso(4)">Paso 4</button>
+                <button type="button" paso="5" class="w-full p-5 text-blue-100" onclick="fnDirigirPaso(5)">Paso 5</button>
+                <button type="button" paso="6" class="w-full p-5 text-blue-100" onclick="fnDirigirPaso(6)">Paso 6</button>
+                <button type="button" paso="7" class="w-full p-5 text-blue-100" onclick="fnDirigirPaso(7)">Paso 7</button>
+            </div>
+            <div class="col-span-10 bg-blue-100 rounded-r-lg rounded-bl-lg p-5" id="div_area_pestanas">
+                <div id="div_paso1">
+                    <div class="mb-5">
+                        <h1 class="text-xl text-yellow-700"> > Frecuencia de aparicion</h1>
+                        <hr class="border-solid border-2 border-yellow-700">
+                        <br>
+                        <span class="text-gray-500 mb-5">Contar cuantas <b class="underline">veces</b> aparece cada <b class="underline">caracter</b></span>
+                    </div>
+                    <div class="overflow-x-auto table-max-height">
+                        <table class="min-w-full border-collapse table-auto text-red-700" id="tbl_frecuencia">
+                            <thead class="sticky top-0 z-10 bg-blue-100 h-10">
+                                <tr>
+                                    <th class="border-r border-blue-500">Caracter</th>
+                                    <th>Frecuencia</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="div_paso2">
+                    <div class="mb-5">
+                        <h1 class="text-xl text-yellow-700"> > Ordenar de menor a mayor</h1>
+                        <hr class="border-solid border-2 border-yellow-700">
+                        <br>
+                        <span class="text-gray-500 mb-5">Ordernar la <b class="underline">frecuencia</b> de aparición de <b class="underline">menor</b> a <b class="underline">mayor</b></span>
+                    </div>
+                    <div class="overflow-x-auto table-max-height">
+                        <table class="min-w-full border-collapse table-auto text-green-700" id="tbl_frecuencia_ordenado">
+                            <thead class="sticky top-0 z-10 bg-blue-100 h-10">
+                                <tr>
+                                    <th class="border-r border-blue-500">Caracter</th>
+                                    <th>Frecuencia</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="div_paso3">
+                    <div class="mb-5">
+                        <h1 class="text-xl text-yellow-700"> > Crear nodos</h1>
+                        <hr class="border-solid border-2 border-yellow-700">
+                        <br>
+                        <span class="text-gray-500 mb-5">Se crea un <b class="underline">nodo hoja</b> por cada <b class="underline">caracter</b> con el nuevo orden.</span><br>
+                        <span class="text-gray-500 mb-5">El <b class="underline">número</b> debajo de cada nodo, indica la <b class="underline">frecuencia</b> del mismo</span>
+                    </div>
+                    <div>
+                        <div id="nodos_hojas" class="flex justify-around">
+
+                        </div>
+                    </div>
+                </div>
+                <div id="div_paso4">
+                    <div class="mb-5">
+                        <h1 class="text-xl text-yellow-700"> > Crear arbol binario</h1>
+                        <hr class="border-solid border-2 border-yellow-700">
+                        <br>
+                        <span class="text-gray-500 mb-5">Se toma los dos <b class="underline">primeros nodos</b> y se <b class="underline">suma</b> las frecuencias, formando asi un <b class="underline">nuevo nodo</b>.</span><br>
+                        <span class="text-gray-500 mb-5">Para este caso, <span id="num1">0</span> + <span id="num2">0</span> = <span id="sumatoria">0</span>, y se reordenara de menor a mayor con este nuevo nodo.</span>
+                        <span class="text-gray-500 mb-5">Es decir, se ubicara en el cuadro negro</span>
+                    </div>
+                    <div>
+                        <div id="nodos_hojas_arbol" class="flex justify-around">
+
+                        </div>
+                        <div class="mt-10">
+                            <span class="text-gray-500 italic">* Repetir este paso hasta que se forme el arbol binario</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="div_paso5"></div>
+                <div id="div_paso6">
+                    <div class="mb-5">
+                        <h1 class="text-xl text-yellow-700"> > Obtener la codificacion de cada caracter</h1>
+                        <hr class="border-solid border-2 border-yellow-700">
+                        <br>
+                        <span class="text-gray-500 mb-5">A partir del arbol generado, obtenemos la <b class="underline">codificacion</b> de cada caracter.</span><br>
+                        <span class="text-gray-500 mb-5">Desde el <b class="underline">nodo raiz</b> nos desplazamos hasta cada caracter y tomamos el valor de la <b class="underline">rama</b>, ya sea 0 o 1.</span>
+                    </div>
+                    <div>
+                        <div class="overflow-x-auto table-max-height">
+                            <table class="min-w-full border-collapse table-auto text-indigo-700" id="tbl_codificacion">
+                                <thead class="sticky top-0 z-10 bg-blue-100 h-10">
+                                    <tr>
+                                        <th>Caracter</th>
+                                        <th>Codificacion</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-center">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div id="div_paso7">
+                    <div class="mb-5">
+                        <h1 class="text-xl text-yellow-700"> > Armar la cadena codificada</h1>
+                        <hr class="border-solid border-2 border-yellow-700">
+                        <br>
+                        <span class="text-gray-500 mb-5">Reemplazamos cada <b class="underline">caracter</b> por el nuevo valor de su <b class="underline">codificacion binaria</b><br>
+                        <br>
+                        <span class="text-gray-500 mb-5 font-bold underline">Cadena Original: </span><br>
+                        <span id="txt_original"></span><br>
+                        <br>
+                        <span class="text-gray-500 mb-5 font-bold underline">Cadena Codificada: </span><br>
+                        <div id="txt_codificado" class="flex flex-wrap"></div><br>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+</div>
+
+<!-- <ul class="cmp5 area-contenido">
+    <li class="tab-content tab-content-3">
+        <h3>Determinar la frecuencia en la que se repite cada caracter: <br>Contabilizar cada
+            caracter </h3> <br>
+        <table class="fl-table" id="tbl_frecuencia">
+            <thead>
+                <tr>
+                    <th>Caracter</th>
+                    <th>Frecuencia</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </li>
+    <li class="tab-content tab-content-4 typography">Contenido 2</li>
+    <li class="tab-content tab-content-5 typography">Contenido 3</li>
+    <li class="tab-content tab-content-6 typography">Contenido 4</li>
+</ul> -->
 
 <div id="mdDescargarArchivo" class="modal">
     <div class="modal-content">
